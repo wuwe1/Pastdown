@@ -43,6 +43,14 @@ final class DatabaseManager: Sendable {
             )
         }
 
+        migrator.registerMigration("v2_addBlobSupport") { db in
+            try db.alter(table: "clipboardItems") { t in
+                t.add(column: "blobData", .blob)
+                t.add(column: "thumbnailData", .blob)
+                t.add(column: "sourceApp", .text)
+            }
+        }
+
         return migrator
     }
 }

@@ -4,7 +4,7 @@ import GRDB
 
 @MainActor @Observable
 final class ClipboardViewModel {
-    var currentClipboardContent: String?
+    var currentClipboardContent: ClipboardContent?
     var pinnedItems: [ClipboardItem] = []
     var selectedItem: ClipboardItem?
     var showingDetail: Bool = false
@@ -13,7 +13,7 @@ final class ClipboardViewModel {
     var filteredItems: [ClipboardItem] {
         guard !searchText.isEmpty else { return pinnedItems }
         let query = searchText.lowercased()
-        return pinnedItems.filter { $0.content.lowercased().contains(query) }
+        return pinnedItems.filter { $0.content.lowercased().contains(query) || $0.preview.lowercased().contains(query) }
     }
 
     private let repository = ClipboardItemRepository()
@@ -31,11 +31,11 @@ final class ClipboardViewModel {
     // MARK: - Setup
 
     private func setupMonitor() {
-        monitor.onNewContent = { [weak self] content, contentType in
+        monitor.onNewContent = { [weak self] content in
             guard let self else { return }
             Task { @MainActor in
                 if self.settings.autoMonitorEnabled {
-                    self.autoSaveContent(content, contentType: contentType)
+                    self.autoSaveContent(content)
                 }
             }
         }
@@ -57,23 +57,34 @@ final class ClipboardViewModel {
     // MARK: - Actions
 
     func refreshCurrentContent() {
-        currentClipboardContent = clipboardService.readText()
+        currentClipboardContent = clipboardService.readContent()
     }
 
     func pinCurrentClipboard() {
-        guard let content = clipboardService.readText(), !content.isEmpty else { return }
-        let contentType = clipboardService.detectContentType(content)
+        guard let content = clipboardService.readContent() else { return }
+        guard content.textContent != nil || content.blobData != nil else { return }
+
+        var thumbnailData: Data?
+        if content.contentType == "image", let blobData = content.blobData {
+            thumbnailData = ClipboardService.generateThumbnail(from: blobData)
+        }
+
         do {
-            try repository.pinItem(content: content, contentType: contentType)
+            try repository.pinItem(from: content, thumbnailData: thumbnailData)
             try repository.enforceMaxItems(settings.maxItems)
         } catch {
             print("Pin error: \(error)")
         }
     }
 
-    private func autoSaveContent(_ content: String, contentType: String) {
+    private func autoSaveContent(_ content: ClipboardContent) {
+        var thumbnailData: Data?
+        if content.contentType == "image", let blobData = content.blobData {
+            thumbnailData = ClipboardService.generateThumbnail(from: blobData)
+        }
+
         do {
-            try repository.saveItem(content: content, contentType: contentType)
+            try repository.saveItem(from: content, thumbnailData: thumbnailData)
             try repository.enforceMaxItems(settings.maxItems)
         } catch {
             print("Auto-save error: \(error)")
@@ -81,7 +92,7 @@ final class ClipboardViewModel {
     }
 
     func copyToClipboard(_ item: ClipboardItem) {
-        clipboardService.writeText(item.content)
+        clipboardService.writeContent(item)
         refreshCurrentContent()
     }
 

@@ -12,8 +12,8 @@ final class ClipboardItemRepository {
     // MARK: - Create / Upsert
 
     @discardableResult
-    func pinItem(content: String, contentType: String = "text") throws -> ClipboardItem {
-        let hash = content.sha256Hash
+    func pinItem(from clipboardContent: ClipboardContent, thumbnailData: Data? = nil) throws -> ClipboardItem {
+        let hash = Self.computeHash(for: clipboardContent)
 
         return try dbQueue.write { db in
             if var existing = try ClipboardItem.filter(ClipboardItem.Columns.hash == hash).fetchOne(db) {
@@ -22,7 +22,14 @@ final class ClipboardItemRepository {
                 try existing.update(db)
                 return existing
             } else {
-                var item = ClipboardItem(content: content, contentType: contentType, isPinned: true)
+                var item = ClipboardItem(
+                    content: clipboardContent.textContent ?? "",
+                    contentType: clipboardContent.contentType,
+                    isPinned: true,
+                    blobData: clipboardContent.blobData,
+                    thumbnailData: thumbnailData,
+                    sourceApp: clipboardContent.sourceApp
+                )
                 try item.insert(db)
                 return item
             }
@@ -30,8 +37,8 @@ final class ClipboardItemRepository {
     }
 
     @discardableResult
-    func saveItem(content: String, contentType: String = "text") throws -> ClipboardItem {
-        let hash = content.sha256Hash
+    func saveItem(from clipboardContent: ClipboardContent, thumbnailData: Data? = nil) throws -> ClipboardItem {
+        let hash = Self.computeHash(for: clipboardContent)
 
         return try dbQueue.write { db in
             if var existing = try ClipboardItem.filter(ClipboardItem.Columns.hash == hash).fetchOne(db) {
@@ -39,11 +46,27 @@ final class ClipboardItemRepository {
                 try existing.update(db)
                 return existing
             } else {
-                var item = ClipboardItem(content: content, contentType: contentType, isPinned: false)
+                var item = ClipboardItem(
+                    content: clipboardContent.textContent ?? "",
+                    contentType: clipboardContent.contentType,
+                    isPinned: false,
+                    blobData: clipboardContent.blobData,
+                    thumbnailData: thumbnailData,
+                    sourceApp: clipboardContent.sourceApp
+                )
                 try item.insert(db)
                 return item
             }
         }
+    }
+
+    // MARK: - Hash Computation
+
+    private static func computeHash(for content: ClipboardContent) -> String {
+        if let blobData = content.blobData, content.contentType == "image" {
+            return blobData.sha256Hash
+        }
+        return (content.textContent ?? "").sha256Hash
     }
 
     // MARK: - Read

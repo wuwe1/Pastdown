@@ -22,7 +22,7 @@ struct ItemDetailView: View {
 
                 Spacer()
 
-                Text("Item Detail")
+                Text(detailTitle)
                     .font(.headline)
                     .fontWeight(.semibold)
 
@@ -43,9 +43,7 @@ struct ItemDetailView: View {
 
             // Content
             ScrollView {
-                Text(item.content)
-                    .font(.system(size: 12, design: .monospaced))
-                    .textSelection(.enabled)
+                detailContent
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(16)
             }
@@ -60,6 +58,17 @@ struct ItemDetailView: View {
                     .foregroundStyle(.tertiary)
 
                 Spacer()
+
+                if item.contentType == "file" {
+                    Button {
+                        revealInFinder()
+                    } label: {
+                        Label("Reveal in Finder", systemImage: "folder")
+                            .font(.system(size: 12))
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                }
 
                 Button {
                     viewModel.copyToClipboard(item)
@@ -82,5 +91,66 @@ struct ItemDetailView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
         }
+    }
+
+    private var detailTitle: String {
+        switch item.contentType {
+        case "image": return "Image"
+        case "file": return "File"
+        case "html": return "HTML"
+        case "rtf": return "Rich Text"
+        case "url": return "URL"
+        case "color": return "Color"
+        default: return "Text"
+        }
+    }
+
+    @ViewBuilder
+    private var detailContent: some View {
+        switch item.contentType {
+        case "image":
+            if let blobData = item.blobData, let nsImage = NSImage(data: blobData) {
+                Image(nsImage: nsImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: .infinity)
+                    .cornerRadius(6)
+            } else {
+                Text("Image data unavailable")
+                    .foregroundStyle(.tertiary)
+            }
+        case "file":
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(spacing: 8) {
+                    Image(systemName: "doc.fill")
+                        .font(.system(size: 24))
+                        .foregroundStyle(.purple)
+                    Text(URL(fileURLWithPath: item.content).lastPathComponent)
+                        .font(.system(size: 14, weight: .medium))
+                }
+                Text(item.content)
+                    .font(.system(size: 12, design: .monospaced))
+                    .textSelection(.enabled)
+                    .foregroundStyle(.secondary)
+            }
+        case "color":
+            VStack(alignment: .leading, spacing: 12) {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color(hex: item.content))
+                    .frame(height: 60)
+                Text(item.content)
+                    .font(.system(size: 14, design: .monospaced))
+                    .textSelection(.enabled)
+            }
+        default:
+            Text(item.content)
+                .font(.system(size: 12, design: .monospaced))
+                .textSelection(.enabled)
+        }
+    }
+
+    private func revealInFinder() {
+        let url = URL(fileURLWithPath: item.content)
+        NSWorkspace.shared.activateFileViewerSelecting([url])
     }
 }
