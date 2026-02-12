@@ -191,11 +191,18 @@ private struct HTMLDetailContent: View {
 
             // Content based on selected tab
             ScrollView {
-                Text(contentForTab)
-                    .font(.system(size: 12, design: .monospaced))
-                    .textSelection(.enabled)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(16)
+                if selectedTab == .markdown {
+                    Text(MarkdownHighlighter.highlight(item.content))
+                        .textSelection(.enabled)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(16)
+                } else {
+                    Text(contentForTab)
+                        .font(.system(size: 12, design: .monospaced))
+                        .textSelection(.enabled)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(16)
+                }
             }
             .frame(maxHeight: .infinity)
 
