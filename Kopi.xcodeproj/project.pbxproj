@@ -29,6 +29,8 @@
 		F9B54FCBB426C606428AE22A /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41CD3B566022A892C229F5B /* AppSettings.swift */; };
 		D4E5F6A7B8C9D0E1F2A3B4C5 /* HTMLToMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D4E5F6A7B8C9D0E1F2A3B4 /* HTMLToMarkdown.swift */; };
 		E5F6A7B8C9D0E1F2A3B4C5D6 /* MarkdownHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7B8C9D0E1F2A3B4C5D6E7 /* MarkdownHighlighter.swift */; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* ScreenshotGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6A7B8C9D0E1F2A3 /* ScreenshotGenerator.swift */; };
+		C3D4E5F6A7B8C9D0E1F2A3B5 /* ScreenshotShowcases.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5F6A7B8C9D0E1F2A3B4C6 /* ScreenshotShowcases.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		F9D96B387E102C04D29B5B51 /* ClipboardItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardItemRepository.swift; sourceTree = "<group>"; };
 		C3D4E5F6A7B8C9D0E1F2A3B4 /* HTMLToMarkdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLToMarkdown.swift; sourceTree = "<group>"; };
 		F6A7B8C9D0E1F2A3B4C5D6E7 /* MarkdownHighlighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownHighlighter.swift; sourceTree = "<group>"; };
+		B2C3D4E5F6A7B8C9D0E1F2A3 /* ScreenshotGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotGenerator.swift; sourceTree = "<group>"; };
+		D4E5F6A7B8C9D0E1F2A3B4C6 /* ScreenshotShowcases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotShowcases.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +178,8 @@
 				7D59274BE41BF62360144A29 /* Constants.swift */,
 				C3D4E5F6A7B8C9D0E1F2A3B4 /* HTMLToMarkdown.swift */,
 				F6A7B8C9D0E1F2A3B4C5D6E7 /* MarkdownHighlighter.swift */,
+				B2C3D4E5F6A7B8C9D0E1F2A3 /* ScreenshotGenerator.swift */,
+				D4E5F6A7B8C9D0E1F2A3B4C6 /* ScreenshotShowcases.swift */,
 				1BB7379E44A2E3BCF312AAB0 /* String+Extensions.swift */,
 			);
 			path = Utilities;
@@ -283,6 +289,8 @@
 				2CDB7EC0C6D7FA03F11A946C /* String+Extensions.swift in Sources */,
 				D4E5F6A7B8C9D0E1F2A3B4C5 /* HTMLToMarkdown.swift in Sources */,
 				E5F6A7B8C9D0E1F2A3B4C5D6 /* MarkdownHighlighter.swift in Sources */,
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* ScreenshotGenerator.swift in Sources */,
+				C3D4E5F6A7B8C9D0E1F2A3B5 /* ScreenshotShowcases.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
