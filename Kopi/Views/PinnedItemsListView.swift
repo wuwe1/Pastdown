@@ -5,14 +5,12 @@ struct PinnedItemsListView: View {
 
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 0) {
+            LazyVStack(spacing: 2) {
                 ForEach(viewModel.pinnedItems) { item in
                     PinnedItemRowView(item: item, viewModel: viewModel)
-                    Divider()
-                        .padding(.horizontal, 16)
                 }
             }
+            .padding(.vertical, 4)
         }
-        .frame(maxHeight: .infinity)
     }
 }

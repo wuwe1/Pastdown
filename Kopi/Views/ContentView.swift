@@ -29,11 +29,16 @@ struct ContentView: View {
 
             Divider()
 
+            // Section header
+            pinnedSectionHeader
+
             // Pinned Items List
             if viewModel.pinnedItems.isEmpty {
                 EmptyStateView()
+                    .frame(height: 120)
             } else {
                 PinnedItemsListView(viewModel: viewModel)
+                    .frame(maxHeight: 320)
             }
 
             Divider()
@@ -60,9 +65,33 @@ struct ContentView: View {
             }
             .buttonStyle(.plain)
             .help("Settings")
+            .keyboardShortcut(",", modifiers: .command)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
+    }
+
+    private var pinnedSectionHeader: some View {
+        HStack {
+            Text("Pinned Items")
+                .font(.caption)
+                .fontWeight(.medium)
+                .foregroundStyle(.secondary)
+
+            if !viewModel.pinnedItems.isEmpty {
+                Text("\(viewModel.pinnedItems.count)")
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 1)
+                    .background(.quaternary.opacity(0.5), in: Capsule())
+            }
+
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 8)
+        .padding(.bottom, 4)
     }
 
     private var footerView: some View {
@@ -83,6 +112,7 @@ struct ContentView: View {
             .buttonStyle(.plain)
             .foregroundStyle(.secondary)
             .font(.caption)
+            .keyboardShortcut("q", modifiers: .command)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
@@ -90,7 +120,6 @@ struct ContentView: View {
 
     private func openSettings() {
         openWindow(id: "settings")
-        // Bring the settings window to front
         NSApp.activate()
     }
 }
