@@ -1,6 +1,10 @@
-# Kopi
+<p align="center">
+  <img src="assets/icon.png" width="128" height="128" alt="Kopi Icon">
+</p>
 
-A lightweight macOS menu bar clipboard manager built with SwiftUI.
+<h1 align="center">Kopi</h1>
+
+<p align="center">A lightweight macOS menu bar clipboard manager built with SwiftUI.</p>
 
 Kopi lives in your menu bar, silently monitoring your clipboard and keeping a searchable history of everything you copy — text, images, files, HTML, colors, and more.
 
@@ -72,4 +76,4 @@ Kopi/
 
 ## License
 
-MIT
+[MIT](LICENSE)
