@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/icon.png" width="128" height="128" alt="Kopi Icon">
+  <img src="assets/icon.png" width="128" height="128" alt="Pastdown Icon">
 </p>
 
-<h1 align="center">Kopi</h1>
+<h1 align="center">Pastdown</h1>
 
 <p align="center">A lightweight macOS menu bar clipboard manager built with SwiftUI.</p>
 
@@ -10,7 +10,7 @@
   <a href="#features">English</a> · <a href="#功能介绍">中文</a>
 </p>
 
-Kopi lives in your menu bar, silently monitoring your clipboard and keeping a searchable history of everything you copy — text, images, files, HTML, colors, and more.
+Pastdown lives in your menu bar, silently monitoring your clipboard and keeping a searchable history of everything you copy — text, images, files, HTML, colors, and more.
 
 ## Features
 
@@ -29,7 +29,7 @@ Kopi lives in your menu bar, silently monitoring your clipboard and keeping a se
 
 ## 功能介绍
 
-Kopi 是一款轻量的 macOS 菜单栏剪贴板管理工具。它静静地运行在菜单栏中，自动记录你复制的一切内容，随时可用。
+Pastdown 是一款轻量的 macOS 菜单栏剪贴板管理工具。它静静地运行在菜单栏中，自动记录你复制的一切内容，随时可用。
 
 - **菜单栏常驻** — 不占 Dock 位置，点击菜单栏图标即可打开
 - **自动记录** — 后台监听剪贴板变化，无需手动操作
@@ -70,9 +70,9 @@ Kopi 是一款轻量的 macOS 菜单栏剪贴板管理工具。它静静地运�
 ## Build
 
 ```bash
-git clone https://github.com/wuwe1/kopi.git
-cd kopi
-open Kopi.xcodeproj
+git clone https://github.com/wuwe1/pastdown.git
+cd pastdown
+open Pastdown.xcodeproj
 ```
 
 Build and run from Xcode (⌘R).
@@ -80,7 +80,7 @@ Build and run from Xcode (⌘R).
 ## Architecture
 
 ```
-Kopi/
+Pastdown/
 ├── App/           → App entry point (MenuBarExtra)
 ├── Models/        → ClipboardItem, AppSettings
 ├── ViewModels/    → ClipboardViewModel
@@ -92,7 +92,7 @@ Kopi/
 
 ## Data Storage
 
-- **Database:** `~/.kopi/kopi.db` (SQLite via GRDB)
+- **Database:** `~/.pastdown/pastdown.db` (SQLite via GRDB)
 - **Settings:** UserDefaults
 
 ## License

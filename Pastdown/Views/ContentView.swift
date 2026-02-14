@@ -83,7 +83,7 @@ struct ContentView: View {
 
     private var headerView: some View {
         HStack {
-            Text("Kopi")
+            Text("Pastdown")
                 .font(.headline)
                 .fontWeight(.semibold)
 

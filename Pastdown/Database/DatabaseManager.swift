@@ -8,7 +8,7 @@ final class DatabaseManager: Sendable {
 
     private init() {
         do {
-            let directoryURL = Constants.kopiDirectoryURL
+            let directoryURL = Constants.pastdownDirectoryURL
             try FileManager.default.createDirectory(at: directoryURL, withIntermediateDirectories: true)
 
             var config = Configuration()

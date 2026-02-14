@@ -20,8 +20,8 @@ Packages/
 *.swp
 *~.nib
 
-# Kopi data (local only)
-.kopi/
+# Pastdown data (local only)
+.pastdown/
 
 # Claude Code
 .claude/

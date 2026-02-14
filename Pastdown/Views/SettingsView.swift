@@ -50,7 +50,7 @@ struct SettingsView: View {
                 }
                 .foregroundStyle(.red)
 
-                Text("Database: ~/.kopi/kopi.db")
+                Text("Database: Application Support/Pastdown/")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

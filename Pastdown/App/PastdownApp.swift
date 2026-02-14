@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct KopiApp: App {
+struct PastdownApp: App {
     @State private var viewModel = ClipboardViewModel()
 
     #if DEBUG
@@ -17,7 +17,7 @@ struct KopiApp: App {
         }
         .menuBarExtraStyle(.window)
 
-        Window("Kopi Settings", id: "settings") {
+        Window("Pastdown Settings", id: "settings") {
             SettingsView(viewModel: viewModel)
         }
         .windowResizability(.contentSize)
@@ -32,7 +32,7 @@ class ScreenshotAppDelegate: NSObject, NSApplicationDelegate {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let outputDir = URL(filePath: ProcessInfo.processInfo.environment["SCREENSHOT_OUTPUT"]
-                ?? "/tmp/kopi-screenshots")
+                ?? "/tmp/pastdown-screenshots")
             let urls = ScreenshotGenerator.generateAll(to: outputDir)
             for url in urls {
                 print("Generated: \(url.path())")

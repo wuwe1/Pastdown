@@ -1,6 +1,6 @@
-name: Kopi
+name: Pastdown
 options:
-  bundleIdPrefix: com.kopi
+  bundleIdPrefix: com.pastdown
   deploymentTarget:
     macOS: "14.0"
   xcodeVersion: "16.0"
@@ -13,30 +13,32 @@ packages:
     from: "7.0.0"
 
 targets:
-  Kopi:
+  Pastdown:
     type: application
     platform: macOS
     sources:
-      - path: Kopi
+      - path: Pastdown
         excludes:
           - Resources/Assets.xcassets/MenuBarIcon.imageset/menubar_icon.pdf
     resources:
-      - path: Kopi/Resources/Assets.xcassets
+      - path: Pastdown/Resources/Assets.xcassets
     info:
-      path: Kopi/Resources/Info.plist
+      path: Pastdown/Resources/Info.plist
       properties:
         LSUIElement: true
-        CFBundleDisplayName: Kopi
-        CFBundleName: Kopi
+        CFBundleDisplayName: Pastdown
+        CFBundleName: Pastdown
+        LSApplicationCategoryType: public.app-category.utilities
+        ITSAppUsesNonExemptEncryption: false
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.kopi.app
-        PRODUCT_NAME: Kopi
+        PRODUCT_BUNDLE_IDENTIFIER: com.pastdown.app
+        PRODUCT_NAME: Pastdown
         MARKETING_VERSION: "1.0.0"
         CURRENT_PROJECT_VERSION: 1
         MACOSX_DEPLOYMENT_TARGET: "14.0"
         SWIFT_VERSION: "6.0"
-        INFOPLIST_FILE: Kopi/Resources/Info.plist
+        INFOPLIST_FILE: Pastdown/Resources/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         GENERATE_INFOPLIST_FILE: true
         INFOPLIST_KEY_LSUIElement: true
@@ -48,6 +50,6 @@ targets:
       - package: GRDB
         product: GRDB
     entitlements:
-      path: Kopi/Kopi.entitlements
+      path: Pastdown/Pastdown.entitlements
       properties:
-        com.apple.security.app-sandbox: false
+        com.apple.security.app-sandbox: true

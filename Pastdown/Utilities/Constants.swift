@@ -1,16 +1,16 @@
 import Foundation
 
 enum Constants {
-    static let appName = "Kopi"
+    static let appName = "Pastdown"
 
     // MARK: - Paths
-    static let kopiDirectoryURL: URL = {
-        let home = FileManager.default.homeDirectoryForCurrentUser
-        return home.appendingPathComponent(".kopi", isDirectory: true)
+    static let pastdownDirectoryURL: URL = {
+        let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        return appSupport.appendingPathComponent("Pastdown", isDirectory: true)
     }()
 
     static let databaseURL: URL = {
-        kopiDirectoryURL.appendingPathComponent("kopi.db")
+        pastdownDirectoryURL.appendingPathComponent("pastdown.db")
     }()
 
     // MARK: - Defaults

@@ -100,7 +100,7 @@ struct MainListShowcase: View {
         VStack(spacing: 0) {
             // Header
             HStack {
-                Text("Kopi")
+                Text("Pastdown")
                     .font(.headline)
                     .fontWeight(.semibold)
                 Spacer()
@@ -294,7 +294,7 @@ struct MainListShowcase: View {
 
 struct HTMLDetailShowcase: View {
     private let markdownContent = """
-        # Welcome to Kopi
+        # Welcome to Pastdown
 
         This is **bold** and *italic* text.
 
@@ -307,8 +307,8 @@ struct HTMLDetailShowcase: View {
         > A lightweight clipboard manager
 
         ```swift
-        let kopi = ClipboardManager()
-        kopi.start()
+        let pastdown = ClipboardManager()
+        pastdown.start()
         ```
         """
 
@@ -421,7 +421,7 @@ struct SettingsShowcase: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             // Title
-            Text("Kopi Settings")
+            Text("Pastdown Settings")
                 .font(.title2)
                 .fontWeight(.semibold)
                 .padding(.horizontal, 20)
@@ -500,7 +500,7 @@ struct SettingsShowcase: View {
 
                     Divider()
 
-                    Text("Database: ~/.kopi/kopi.db")
+                    Text("Database: Application Support/Pastdown/")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .padding(.vertical, 8)
