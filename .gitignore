@@ -25,3 +25,8 @@ Packages/
 
 # Claude Code
 .claude/
+
+# Symlinked skills (installed via sk, machine-specific)
+.claude/skills/
+.claude/rules/
+.claude/commands/
